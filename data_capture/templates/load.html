@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="six-columns">
+      <h3>Demo</h3>
+      {% if messages %}
+        {% for message in messages %}
+          <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+      <p>Proof-of-concept to load data from local CSV files</p>
+      <form method="POST">
+        {% csrf_token %}
+        <input type="submit" name="load" class="button-primary" value="Load Data">
+        <input type="submit" name="clear" class="button" value="Clear Data">
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock body %}

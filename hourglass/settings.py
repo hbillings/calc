@@ -30,6 +30,7 @@ TEMPLATE_DEBUG = False
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'hourglass/templates'),
     os.path.join(BASE_DIR, 'hourglass_site/templates'),
+    os.path.join(BASE_DIR, 'data_capture/templates'),
 )
 
 ALLOWED_HOSTS = ['*']
