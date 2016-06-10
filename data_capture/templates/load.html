@@ -17,6 +17,7 @@
       <p>Proof-of-concept to load data from local CSV files</p>
       <form method="POST" enctype='multipart/form-data'>
         {% csrf_token %}
+        <label for="file">Upload hourly_rates.csv</label>
         <input type="file" name="file" accept=".csv">
         <input type="submit" name="load" class="button-primary" value="Load Data">
         <input type="submit" name="clear" class="button" value="Clear Data">
