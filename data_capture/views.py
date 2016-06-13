@@ -15,7 +15,7 @@ class LoadDataView(FormView):
     success_url = "/data_capture/"
 
     def form_valid(self, form):
-        if 'load' in form.data:
+        if 'load' in form.data and 'file' in self.request.FILES:
             uploaded_file = self.request.FILES['file']
             contracts = list(ContractDataReader().parse(
                 codecs.iterdecode(uploaded_file, 'utf-8')))
@@ -38,4 +38,7 @@ class LoadDataView(FormView):
             messages.add_message(
                 self.request, messages.SUCCESS, 'Data cleared'
             )
+        else:
+            messages.add_message(
+                self.request, messages.ERROR, 'File must be selected')
         return super(LoadDataView, self).form_valid(form)

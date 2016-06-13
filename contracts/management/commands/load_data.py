@@ -1,12 +1,10 @@
 from django.core.management import call_command
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from django.conf import settings
-from contracts.models import Contract
-from contracts.constants import FEDERAL_MIN_CONTRACT_RATE
 import os
 import logging
-from datetime import datetime, date
 
+from contracts.models import Contract
 from contracts.lib.contractdatareader import ContractDataReader
 
 
