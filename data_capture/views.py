@@ -16,7 +16,6 @@ class LoadDataView(FormView):
 
     def form_valid(self, form):
         if 'load' in form.data:
-            print("----------------------")
             uploaded_file = self.request.FILES['file']
             contracts = list(ContractDataReader().parse(
                 codecs.iterdecode(uploaded_file, 'utf-8')))
