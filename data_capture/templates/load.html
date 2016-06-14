@@ -11,7 +11,7 @@
       <h3>Demo</h3>
       {% if messages %}
         {% for message in messages %}
-          <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+          <p{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</p>
         {% endfor %}
       {% endif %}
       <p>Proof-of-concept to load data from local CSV files</p>
