@@ -8,7 +8,7 @@ from django.core.management import BaseCommand, call_command
 from django.db import transaction
 from optparse import make_option
 
-from contracts.management.commands.load_data import FEDERAL_MIN_CONTRACT_RATE
+from contracts.constants import FEDERAL_MIN_CONTRACT_RATE
 from contracts.models import Contract
 
 
