@@ -12,11 +12,23 @@ class TestContractDataReader(TestCase):
         full_row = self.make_row()
         ContractDataReader.make_contract(full_row)
 
-        row_without_experience = self.make_row(experience='')
-        ContractDataReader.make_contract(row_without_experience)
+        row_without_experience = self.make_row(min_years_experience='')
+        c = ContractDataReader.make_contract(row_without_experience)
+        self.assertEquals(c.min_years_experience, 0)
 
         row_without_dates = self.make_row(begin_date='', end_date='')
-        ContractDataReader.make_contract(row_without_dates)
+        c = ContractDataReader.make_contract(row_without_dates)
+        self.assertEquals(c.contract_start, None)
+        self.assertEquals(c.contract_end, None)
+
+    def test_contract_current_price_is_set(self):
+        row = self.make_row()
+        c = ContractDataReader.make_contract(row)
+        self.assertEquals(c.current_price, 38)
+
+        row_diff_contract_year = self.make_row(contract_year='2')
+        c = ContractDataReader.make_contract(row_diff_contract_year)
+        self.assertEquals(c.current_price, 39)
 
     def test_make_contract_fails(self):
         row_without_price = self.make_row(year_1='')
