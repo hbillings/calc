@@ -23,13 +23,13 @@ class LoadDataView(FormView):
 
         Contract.objects.all().delete()
 
-        Contract.objects.bulk_create(contracts)
+        created_contracts = Contract.objects.bulk_create(contracts)
 
         management.call_command(
             'update_search_field',
             Contract._meta.app_label, Contract._meta.model_name
         )
-        return contracts
+        return created_contracts
 
     def form_valid(self, form):
         if 'load' in form.data:
@@ -50,7 +50,6 @@ class LoadDataView(FormView):
                         self.request, messages.ERROR,
                         'Unable to read contracts from uploaded file'
                     )
-                    print("here")
 
         elif 'clear' in form.data:
             self.clear_contracts()
