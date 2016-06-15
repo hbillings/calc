@@ -14,7 +14,7 @@
           <p{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</p>
         {% endfor %}
       {% endif %}
-      <p>Proof-of-concept to load data from local CSV files</p>
+      <p>Proof-of-concept to load data from uploaded CSV files</p>
       <form method="POST" enctype='multipart/form-data'>
         {% csrf_token %}
         <label for="file">Upload hourly_prices.csv</label>
