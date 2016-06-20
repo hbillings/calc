@@ -28,8 +28,8 @@ class PriceList(models.Model):
     approval_date = models.DateField(null=True, blank=True)
 
 
-# This model is based on the Sched 70 price proposal list excel sheet that
-# was provided to us as an example.
+# This model is based on the contractor (not sched 70) price proposal
+# excel sheet that was provided to us as an example.
 # It should be trimmed down to only the necessary fields, possibly those
 # described by FLIFCALC.
 # https://github.com/18F/calc/wiki/Federal-Labor-Interchange-Format-for-CALC
