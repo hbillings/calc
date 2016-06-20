@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 import sys
 import dj_database_url
+
+from docker_django_management import IS_RUNNING_IN_DOCKER
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 API_HOST = os.environ.get('API_HOST', '/api/')
@@ -44,6 +48,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
 
     'hourglass_site',
@@ -59,6 +64,7 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
     'djangosecure.middleware.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -111,7 +117,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (
 #    os.path.join(BASE_DIR, 'static'),
 )
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 PAGINATION = 200
 REST_FRAMEWORK = {
@@ -175,7 +181,7 @@ SECURE_SSL_REDIRECT = True
 # Amazon ELBs pass on X-Forwarded-Proto.
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
-if 'IS_RUNNING_IN_DOCKER' in os.environ:
+if IS_RUNNING_IN_DOCKER:
     from hourglass.docker_settings import *
 else:
     try:
